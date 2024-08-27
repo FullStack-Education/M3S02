@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -29,11 +30,38 @@ public class LembreteControlador {
     }
 
     @GetMapping
-    public List<LembreteResposta> get() {
+    public List<LembreteResposta> get(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal) {
         log.info("GET /lembretes -> Begin");
-        List<LembreteResposta> res = servico.buscarTodos();
+        List<LembreteResposta> res = servico.buscarTodos(dataHoraInicial, dataHoraFinal);
 
         log.info("GET /lembretes -> End");
+        return res;
+    }
+
+    @GetMapping("atuais")
+    public List<LembreteResposta> getAtuais() {
+        log.info("GET /lembretes/atuais -> Begin");
+        List<LembreteResposta> res = servico.buscarAtuais();
+
+        log.info("GET /lembretes/atuais -> End");
+        return res;
+    }
+
+    @GetMapping("proximos")
+    public List<LembreteResposta> getProximos() {
+        log.info("GET /lembretes/proximos -> Begin");
+        List<LembreteResposta> res = servico.buscarProximos();
+
+        log.info("GET /lembretes/proximos -> End");
+        return res;
+    }
+
+    @GetMapping("anteriores")
+    public List<LembreteResposta> getAnteriores() {
+        log.info("GET /lembretes/anteriores -> Begin");
+        List<LembreteResposta> res = servico.buscarAnteriores();
+
+        log.info("GET /lembretes/anteriores -> End");
         return res;
     }
 

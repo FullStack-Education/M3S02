@@ -6,10 +6,12 @@ import br.com.fullstack.lembretes.dto.LembreteResposta;
 import br.com.fullstack.lembretes.entidades.Lembrete;
 import br.com.fullstack.lembretes.enums.Status;
 import br.com.fullstack.lembretes.repositorios.LembreteRepositorio;
+import br.com.fullstack.lembretes.utils.DataHoraUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -34,9 +36,45 @@ public class LembreteServicoImpl implements LembreteServico {
     }
 
     @Override
-    public List<LembreteResposta> buscarTodos() {
+    public List<LembreteResposta> buscarTodos(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal) {
         log.info("Buscando todos os lembretes");
-        return repositorio.findAll().stream().map(LembreteResposta::new).toList();
+
+        if (dataHoraInicial == null) {
+            return repositorio.findAll()
+                    .stream().map(LembreteResposta::new).toList();
+        }
+
+        if (dataHoraFinal == null) {
+            dataHoraFinal = DataHoraUtil.ultimaHoraDoDia(dataHoraInicial);
+        }
+
+        log.info("Filtrando pelo intervalo de datas: {} e {}", dataHoraInicial, dataHoraFinal);
+        return repositorio.findByLembrarEmBetweenOrderByLembrarEm(dataHoraInicial, dataHoraFinal)
+                .stream().map(LembreteResposta::new).toList();
+    }
+
+    @Override
+    public List<LembreteResposta> buscarAtuais() {
+        log.info("Buscando todos os lembretes atuais");
+
+        return repositorio.findByLembrarEmEqualsTodayOrderByLembrarEm()
+                .stream().map(LembreteResposta::new).toList();
+    }
+
+    @Override
+    public List<LembreteResposta> buscarProximos() {
+        log.info("Buscando todos os próximos lembretes");
+
+        return repositorio.findByLembrarEmAfterNowOrderByLembrarEm()
+                .stream().map(LembreteResposta::new).toList();
+    }
+
+    @Override
+    public List<LembreteResposta> buscarAnteriores() {
+        log.info("Buscando todos os lembretes anteriores");
+
+        return repositorio.findByLembrarEmBeforeNowOrderByLembrarEm()
+                .stream().map(LembreteResposta::new).toList();
     }
 
     @Override

@@ -12,9 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class LembreteAbstrato {
+
     private String titulo;
     private String descricao;
     private LocalDateTime lembrarEm;
     private Prioridade prioridade;
     private Status status;
+
 }
