@@ -17,6 +17,5 @@ public abstract class LembreteAbstrato {
     private String descricao;
     private LocalDateTime lembrarEm;
     private Prioridade prioridade;
-    private Status status;
 
 }

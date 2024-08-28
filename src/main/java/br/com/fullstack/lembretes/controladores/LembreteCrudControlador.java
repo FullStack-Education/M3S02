@@ -5,6 +5,11 @@ import br.com.fullstack.lembretes.dto.LembreteResposta;
 import br.com.fullstack.lembretes.servicos.LembreteServico;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("lembretes")
-public class LembreteControlador {
+public class LembreteCrudControlador {
 
     private final LembreteServico servico;
 
@@ -35,33 +40,6 @@ public class LembreteControlador {
         List<LembreteResposta> res = servico.buscarTodos(dataHoraInicial, dataHoraFinal);
 
         log.info("GET /lembretes -> End");
-        return res;
-    }
-
-    @GetMapping("atuais")
-    public List<LembreteResposta> getAtuais() {
-        log.info("GET /lembretes/atuais -> Begin");
-        List<LembreteResposta> res = servico.buscarAtuais();
-
-        log.info("GET /lembretes/atuais -> End");
-        return res;
-    }
-
-    @GetMapping("proximos")
-    public List<LembreteResposta> getProximos() {
-        log.info("GET /lembretes/proximos -> Begin");
-        List<LembreteResposta> res = servico.buscarProximos();
-
-        log.info("GET /lembretes/proximos -> End");
-        return res;
-    }
-
-    @GetMapping("anteriores")
-    public List<LembreteResposta> getAnteriores() {
-        log.info("GET /lembretes/anteriores -> Begin");
-        List<LembreteResposta> res = servico.buscarAnteriores();
-
-        log.info("GET /lembretes/anteriores -> End");
         return res;
     }
 

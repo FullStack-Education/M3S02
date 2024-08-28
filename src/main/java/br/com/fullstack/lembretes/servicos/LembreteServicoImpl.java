@@ -9,6 +9,8 @@ import br.com.fullstack.lembretes.repositorios.LembreteRepositorio;
 import br.com.fullstack.lembretes.utils.DataHoraUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -54,6 +56,11 @@ public class LembreteServicoImpl implements LembreteServico {
     }
 
     @Override
+    public Page<LembreteResposta> buscarTodosPaginado(Pageable pageable) {
+        return repositorio.findAll(pageable).map(LembreteResposta::new);
+    }
+
+    @Override
     public List<LembreteResposta> buscarAtuais() {
         log.info("Buscando todos os lembretes atuais");
 
@@ -79,26 +86,27 @@ public class LembreteServicoImpl implements LembreteServico {
 
     @Override
     public LembreteResposta buscarPorId(Long id) {
+        return new LembreteResposta(buscarEntidadePorId(id));
+    }
+
+    private Lembrete buscarEntidadePorId(Long id) {
         log.info("Buscando lembrete por ID: {}", id);
-        LembreteResposta res = new LembreteResposta(
-                repositorio.findById(id)
-                        .orElseThrow(() -> new NaoEncontradoExcecao(
-                                "Lembrete não encontrado com ID: " + id
-                        ))
-        );
+        Lembrete lembrete = repositorio.findById(id)
+                .orElseThrow(() -> new NaoEncontradoExcecao("Lembrete não encontrado com ID: " + id));
 
         log.info("Lembrete encontrado com ID: {}", id);
-        return res;
+        return lembrete;
     }
 
     @Override
     public LembreteResposta alterar(Long id, LembreteRequisicao req) {
         log.info("Alterando lembrete com ID: {}", id);
 
-        buscarPorId(id);
+        Lembrete versaoAnterior = buscarEntidadePorId(id);
 
         Lembrete lembrete = new Lembrete(req);
         lembrete.setId(id);
+        lembrete.setStatus(versaoAnterior.getStatus());
 
         log.info("Salvando lembrete com ID: {}", id);
         repositorio.save(lembrete);
@@ -117,6 +125,24 @@ public class LembreteServicoImpl implements LembreteServico {
         log.info("Lembrete com ID {} foi ELIMINADO!", id);
         log.info("Lembrete com ID {} Virou PÓ!", id);
         log.info("Lembrete com ID {} já era! ;'(", id);
+    }
+
+    @Override
+    public void pedente(Long id) {
+        mudarStatus(id, Status.PENDENTE);
+    }
+
+    @Override
+    public void concluir(Long id) {
+        mudarStatus(id, Status.CONCLUIDO);
+    }
+
+    private void mudarStatus(Long id, Status status) {
+        log.info("Mudar status do Lembrete com ID {} para: {}", id, status);
+
+        Lembrete lembrete = buscarEntidadePorId(id);
+        lembrete.setStatus(status);
+        repositorio.save(lembrete);
     }
 
 }

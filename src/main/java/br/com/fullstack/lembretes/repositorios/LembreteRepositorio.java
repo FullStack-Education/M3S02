@@ -1,6 +1,8 @@
 package br.com.fullstack.lembretes.repositorios;
 
 import br.com.fullstack.lembretes.entidades.Lembrete;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface LembreteRepositorio extends JpaRepository<Lembrete, Long> {
+
+    Page<Lembrete> findAll(Pageable pageable);
 
     List<Lembrete> findByLembrarEmBetweenOrderByLembrarEm(LocalDateTime dataInicial, LocalDateTime dataFinal);
 
