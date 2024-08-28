@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "c6a2671a-87c6-49a0-b25d-9f98ab83f78f",
+		"name": "M3S02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9297901",
+		"_collection_link": "https://moralbusiness.postman.co/workspace/FullStack~e8a9d216-15d3-4056-975b-5e11e4be7c99/collection/9297901-c6a2671a-87c6-49a0-b25d-9f98ab83f78f?action=share&source=collection_link&creator=9297901"
+	},
+	"item": [
+		{
+			"name": "lembretes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"Apagar\",\n    \"descricao\": \"Apagar\",\n    \"lembrarEm\": \"2024-08-27T23:00:00\",\n    \"prioridade\": \"BAIXA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/lembretes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes"
+					],
+					"query": [
+						{
+							"key": "dataHoraInicial",
+							"value": "2019-08-27T09:00:00",
+							"disabled": true
+						},
+						{
+							"key": "dataHoraFinal",
+							"value": "2024-08-31T12:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/paginado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/paginado?sort=prioridade,asc&sort=status,desc&size=10&page=0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"paginado"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "prioridade,asc"
+						},
+						{
+							"key": "dataHoraInicial",
+							"value": "2019-08-27T09:00:00",
+							"disabled": true
+						},
+						{
+							"key": "dataHoraFinal",
+							"value": "2024-08-31T12:00:00",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "status,desc"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/paginado/hateoas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/paginado/hateoas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"paginado",
+						"hateoas"
+					],
+					"query": [
+						{
+							"key": "dataHoraInicial",
+							"value": "2019-08-27T09:00:00",
+							"disabled": true
+						},
+						{
+							"key": "dataHoraFinal",
+							"value": "2024-08-31T12:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/atuais",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/atuais",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"atuais"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/proximos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/proximos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"proximos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/anteriores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/anteriores",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"anteriores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/5",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/:id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"Apagar mesmo\",\n    \"descricao\": \"Não se esqueça de apagar\",\n    \"lembrarEm\": \"2024-10-27T23:00:00\",\n    \"prioridade\": \"BAIXA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/:id/concluir",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/1/concluir",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"1",
+						"concluir"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lembretes/:id/pendente",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/lembretes/1/pendente",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"lembretes",
+						"1",
+						"pendente"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
