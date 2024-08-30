@@ -244,13 +244,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/lembretes/11",
+					"raw": "{{baseUrl}}/lembretes/13",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"lembretes",
-						"11"
+						"13"
 					]
 				}
 			},
@@ -295,6 +295,21 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "LEMBRETE-API",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "2M3CGxQ8JzRd2H3OMNQW",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
