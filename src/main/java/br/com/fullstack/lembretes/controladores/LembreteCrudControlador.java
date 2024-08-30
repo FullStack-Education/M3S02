@@ -98,7 +98,7 @@ public class LembreteCrudControlador {
     public LembreteResposta put(
             @Parameter(description = "ID do lembrete", example = "1")
             @PathVariable Long id,
-            @RequestBody LembreteRequisicao req
+            @Valid @RequestBody LembreteRequisicao req
     ) {
         log.info("PUT /lembretes/{} -> Begin", id);
         LembreteResposta res = servico.alterar(id, req);
